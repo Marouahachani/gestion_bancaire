@@ -11,6 +11,12 @@
 </head>
 <body>
 	<%@include file="layout/navbar.jsp"%>
-	<div class="container"></div>
+	<div class="container" align="center">
+	<h1 >Bienvenue dans votre banque ${user.login}</h1>
+	
+    
+        
+    </div>
+	</div>
 </body>
 </html>

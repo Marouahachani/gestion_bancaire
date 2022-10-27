@@ -2,19 +2,24 @@ package hachani.marwa.web;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import hachani.marwa.dao.ClientDaoImpl;
 import hachani.marwa.dao.CompteDaoImpl;
 import hachani.marwa.dao.DemandeDaoImpl;
+import hachani.marwa.dao.UtilsateurDaoImpl;
 import hachani.marwa.metier.Compte;
 import hachani.marwa.metier.Demande;
+import hachani.marwa.metier.Utilisateur;
 import hachani.marwa.metier.client;
 
 
@@ -24,6 +29,7 @@ public class ClientServelet extends HttpServlet {
 	ClientDaoImpl cdi = new ClientDaoImpl();
 	private CompteDaoImpl cptdi = new CompteDaoImpl();
 	private DemandeDaoImpl dmndi = new DemandeDaoImpl();
+	UtilsateurDaoImpl uti= new UtilsateurDaoImpl();
        
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req,resp);
@@ -39,6 +45,7 @@ public class ClientServelet extends HttpServlet {
 		client c;
 		Compte cpt;
 		Demande dmn;
+		Utilisateur u;
 		
 		
    
@@ -58,6 +65,33 @@ public class ClientServelet extends HttpServlet {
 				request.getRequestDispatcher("nouveau-client.jsp").forward(request,response);
 				break;
 				
+		
+			case"/login":
+				String login= request.getParameter("login");
+				String pass= request.getParameter("pass");
+				
+		         
+			u = uti.checkLogin(login, pass);
+			String destPage = "login.jsp";
+			 
+			if (u != null) {
+			    HttpSession session = request.getSession();
+			    session.setAttribute("user", u);
+			    System.out.println(u.toString());
+			    destPage = "index.jsp";
+			} else {
+			    String message = "veuillez verifier le login et/ou mot de passe";
+			    request.setAttribute("message", message);
+			}
+			 
+			RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+			dispatcher.forward(request, response);
+				
+				
+		
+		
+				break;
+			
 			case"/save-client":
 				String nom= request.getParameter("nom");
 				String prenom= request.getParameter("prenom");

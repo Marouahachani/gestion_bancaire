@@ -8,6 +8,12 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,10 +23,10 @@
 
 
 		<section class="w-100 p-4 d-flex justify-content-center pb-4">
-			<form style="width: 22rem;" >
+			<form style="width: 22rem;" action="login" method="post" >
 				<!-- Email input -->
 				<div class="form-outline mb-4">
-					<input type="email" id="form2Example1" class="form-control">
+					<input type="text" id="form2Example1" name="login" class="form-control">
 					<label class="form-label" for="form2Example1"
 						style="margin-left: 0px;">Nom d'utilisateur</label>
 					<div class="form-notch">
@@ -32,7 +38,7 @@
 
 				<!-- Password input -->
 				<div class="form-outline mb-4">
-					<input type="password" id="form2Example2" class="form-control">
+					<input type="password" id="form2Example2" name="pass" class="form-control">
 					<label class="form-label" for="form2Example2"
 						style="margin-left: 0px;">Mot de passe</label>
 					<div class="form-notch">
@@ -41,6 +47,9 @@
 						<div class="form-notch-trailing"></div>
 					</div>
 				</div>
+				${message}
+                       
+            <button type="submit" class="btn btn-primary btn-block mb-4">se connecter</button>
 
 				<!-- 2 column grid layout for inline styling -->
 				<div class="row mb-4">
@@ -61,8 +70,13 @@
 				</div>
 
 				<!-- Submit button -->
-						<a class="btn btn-primary btn-block mb-4" href="index.jsp">se connecter</a>
+<!-- 						<a class="btn btn-primary btn-block mb-4" href="index.jsp">se connecter</a> -->
 				<!-- Register buttons -->
+				
+				
+            
+				
+				
 				<div class="text-center">
 					<p>
 					</p>
@@ -86,4 +100,29 @@
 		</section>
 	</div>
 </body>
+<script type="text/javascript">
+ 
+    $(document).ready(function() {
+        $("#loginForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+         
+                password: "required",
+            },
+             
+            messages: {
+                email: {
+                    required: "Please enter email",
+                    email: "Please enter a valid email address"
+                },
+                 
+                password: "Please enter password"
+            }
+        });
+ 
+    });
+</script>
 </html>

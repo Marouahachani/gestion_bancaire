@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 	<div class="container">
-		<a class="navbar-brand" href="index">GBMS</a>
+		<a class="navbar-brand" href="index">Acceuil</a>
 
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
